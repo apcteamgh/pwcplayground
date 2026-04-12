@@ -188,14 +188,14 @@
     <div id="help-overlay">
         <div id="help-box">
             <h2>How to use the simulator</h2>
-            <p><strong>1. Add components:</strong> Use the toolbar buttons to add Sources, Tanks, Sinks, and Controllers (PID) to the workspace.</p>
-            <p><strong>2. Connect Pipes:</strong> Hold <strong>Ctrl</strong> and click a component to reveal its connection ports. Click a port to start a pipe, then click a port on another component to connect them.</p>
-            <p><strong>3. Connect Controller (PID):</strong><br>
-               - <em>Process Value (PV):</em> Connect a Tank port to a PID port exactly like drawing a pipe.<br>
-               - <em>Control Valve (CV):</em> Hold <strong>Ctrl</strong> and click a PID. All available control valves (red flow circles) will light up with a yellow glow. Click a flow circle to connect the PID output signal.</p>
-            <p><strong>4. Advanced Routing:</strong> Drag the red flow circle to route the pipe freely. Hover and drag the invisible vertical/horizontal pipe segments to adjust 90-degree corners. Drag the red/green pipe ends to snap them to different component ports.</p>
-            <p><strong>5. Multi-Select & Controls:</strong> Click and drag on the empty background to select and move/delete multiple items together. Double-click tanks, PIDs, or flow circles to edit their settings. Use <strong>Reset Levels</strong> to quickly set all tanks to 50%.</p>
-            <p><strong>6. Error States:</strong> If a tank runs empty (0%) or overflows (100%), the simulation halts automatically to prevent errors and displays a large red X.</p>
+            <p><strong>1. Add components:</strong> Use the toolbar buttons to add Sources, Tanks, Sinks, and Controllers to the workspace.</p>
+            <p><strong>2. Connect Pipes:</strong> Hold <strong>Ctrl</strong> and click a component to reveal its connection ports. Click a port to start a pipe/connection, then click a port on another component to connect them.</p>
+            <p><strong>3. Connect Controller:</strong><br>
+               - <em>Controlled Level (CV):</em> Connect a Tank port to a PID port exactly like connecting a pipe.<br>
+               - <em>Manipulated Flow (MV):</em> Hold <strong>Ctrl</strong> and click a level controller. All available flows (red circles) will light up with a yellow glow. Click a flow circle to select it as the manipulated variable (flow).</p>
+            <p><strong>4. Advanced Routing:</strong> Drag the red flow circle to route the pipe freely. Drag the red/green pipe ends (once highlighted) to snap them to different component ports.</p>
+            <p><strong>5. Multi-Select & Controls:</strong> Click and drag on the empty background to select and move/delete multiple items together. Double-click tanks, controllers, or flow circles to edit their settings. Use <strong>Reset Levels</strong> to quickly set all tanks to 50%.</p>
+            <p><strong>6. Failure:</strong> If a tank runs empty (0%) or overflows (100%), the simulation halts automatically and a red X will be displayed on the actual tank.</p>
             <div class="modal-buttons" style="margin-top: 15px;">
                 <button onclick="document.getElementById('help-overlay').style.display='none'">Got it!</button>
             </div>
@@ -467,9 +467,9 @@
             elif node_type == "source": nodes[node_id] = {"type": "source", "x": x, "y": y}
             elif node_type == "sink": nodes[node_id] = {"type": "sink", "x": x, "y": y}
             elif node_type == "pid": nodes[node_id] = {
-                "type": "pid", "x": x, "y": y, "sp": 50.0, "kc": 1.0, "ti": 300.0, "td": 0.0, 
-                "type_ctrl": "parallel", "tdf": 1.0, "beta": 1.0, "tarw": 5.0, "tf": 0.0,
-                "action": "reverse", "integral": 0.0, "prev_e": 0.0, "derivative": 0.0, "y_f": None,
+                "type": "pid", "x": x, "y": y, "sp": 50.0, "kc": 2.4, "ti": 600.0, "td": 0.0, 
+                "type_ctrl": "parallel", "tdf": 1.0, "beta": 1.0, "tarw": 60.0, "tf": 0.0,
+                "action": "direct", "integral": 0.0, "prev_e": 0.0, "derivative": 0.0, "y_f": None,
                 "pv_source": None, "cv_target": None, "needs_sync": False
             }
             
